@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.IntentCompat
 import androidx.core.graphics.Insets
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -92,8 +93,10 @@ class MainFragment : Fragment() {
             viewModel.clearText()
         }
         binding.buttonNav.setOnClickListener {
-            val destination = activity?.intent?.getSerializableExtra(MainViewModel.DESTINATION)
-            viewModel.navigate(destination as Destinations?)
+            val destination = activity?.intent?.let {
+                IntentCompat.getSerializableExtra(it, MainViewModel.DESTINATION, Destinations::class.java)
+            }
+            viewModel.navigate(destination)
         }
         binding.buttonNavCompose.setOnClickListener {
             activity?.intent = Intent(activity, BasicComposeActivity::class.java)
