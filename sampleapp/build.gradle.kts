@@ -44,6 +44,7 @@ configure<ApplicationExtension> {
                     device = "Pixel 5"
                     apiLevel = 35
                     systemImageSource = "aosp-atd"
+                    testedAbi = "x86_64"
                 }
             }
         }
