@@ -82,7 +82,7 @@ class SharedPublishPlugin : Plugin<Project> {
                         licenses {
                             license {
                                 name.set("MIT License")
-                                url.set("http://www.opensource.org/licenses/mit-license.php")
+                                url.set("https://opensource.org/licenses/MIT")
                             }
                         }
                         developers {
@@ -93,7 +93,7 @@ class SharedPublishPlugin : Plugin<Project> {
                             }
                         }
                         scm {
-                            url.set("http://github.com/Progressive-Insurance/kherkin")
+                            url.set("https://github.com/Progressive-Insurance/kherkin")
                             connection.set("scm:git:https://github.com/Progressive-Insurance/kherkin.git")
                             developerConnection.set("scm:git:ssh://github.com/Progressive-Insurance/kherkin.git")
                         }

@@ -29,4 +29,8 @@ dependencies {
     api(libs.espresso.core)
     api(libs.espresso.contrib)
     api(project(":common"))
+    constraints {
+        api(libs.jsoup) { because("CVE-2021-37714, CVE-2022-36033, CVE-2026-75140 in versions pulled in by espresso-contrib") }
+        api(libs.guava) { because("CVE-2026-102554 in versions pulled in by espresso-device") }
+    }
 }
