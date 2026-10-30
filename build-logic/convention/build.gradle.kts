@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     `kotlin-dsl`
 }
@@ -10,8 +12,17 @@ dependencies {
     compileOnly(libs.vanniktech.maven.publish)
 }
 
+val javaTarget = libs.versions.jvmTarget.get()
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(javaTarget)
+    targetCompatibility = JavaVersion.toVersion(javaTarget)
+}
+
 kotlin {
-    jvmToolchain(17)
+    compilerOptions {
+        jvmTarget = JvmTarget.fromTarget(javaTarget)
+    }
 }
 
 gradlePlugin {
