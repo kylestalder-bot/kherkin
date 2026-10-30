@@ -10,9 +10,14 @@ import androidx.compose.ui.test.performTextInput
 import com.progressive.kherkin.common.testcore.ComposeTestLogger
 import com.progressive.kherkin.common.testcore.Gherkin
 
-/** Finds a node with [tag] and inputs [text] into the text field. */
-fun Gherkin.IEnterTextIntoField(tag: String, text: String, composeTestRule: ComposeTestRule) {
-    ComposeTestLogger().info("${::IEnterTextIntoField.name}: onNodeWithTag($tag).assert(hasSetTextAction()).performTextInput($text)")
+/**
+ * Finds a node with [tag] and inputs [text] into the text field.
+ *
+ * Only the length of [text] is logged unless [logValue] is true, so secrets typed into fields stay out of logcat.
+ */
+fun Gherkin.IEnterTextIntoField(tag: String, text: String, composeTestRule: ComposeTestRule, logValue: Boolean = false) {
+    val loggedText = if (logValue) text else "<${text.length} chars>"
+    ComposeTestLogger().info("${::IEnterTextIntoField.name}: onNodeWithTag($tag).assert(hasSetTextAction()).performTextInput($loggedText)")
     composeTestRule.onNodeWithTag(tag).assert(hasSetTextAction()).performTextInput(text)
     ComposeTestLogger().info("${::IEnterTextIntoField.name}: onNodeWithTag($tag).assert(hasSetTextAction()).performImeAction()")
     composeTestRule.onNodeWithTag(tag).assert(hasSetTextAction()).performImeAction()
