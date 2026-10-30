@@ -17,6 +17,18 @@ extensions.extraProperties["DESCRIPTION"] = "An Android UI testing framework for
 
 configure<LibraryExtension> {
     namespace = "com.progressive.kherkin.espresso"
+
+    testOptions {
+        managedDevices {
+            localDevices {
+                create("pixel5api35") {
+                    device = "Pixel 5"
+                    apiLevel = 35
+                    systemImageSource = "aosp-atd"
+                }
+            }
+        }
+    }
 }
 
 dependencies {

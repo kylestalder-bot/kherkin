@@ -40,7 +40,7 @@ jobs:
       - name: Setup emu
         run: ./gradlew sampleapp:pixel5api35Setup
       - name: Run UI Tests
-        run: ./gradlew sampleapp:pixel5api35DebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
+        run: ./gradlew espresso:pixel5api35DebugAndroidTest sampleapp:pixel5api35DebugAndroidTest -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
 
   publish_release:
     name: Publish Release
