@@ -164,6 +164,7 @@ When.ITouchNode("test tag", composeTestRule)
 // Type a string into a text field with matching resource ID
 When.IEnterTextIntoField(R.id.textfield, "text to enter")
 // Type a string into a node with a set text action and a matching tag
+// (only the text length is logged; pass logValue = true to log the text itself)
 When.IEnterTextIntoField("test tag", "text to enter", composeTestRule)
 ```
 
