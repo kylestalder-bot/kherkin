@@ -7,8 +7,4 @@ plugins {
 
 allprojects {
     group = "com.progressive.kherkin"
-    repositories {
-        google()
-        mavenCentral()
-    }
 }

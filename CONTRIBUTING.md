@@ -42,6 +42,12 @@ We can't wait to hear about your new ideas. Please consider the size of the feat
     ./gradlew connectedAndroidTest
     ```
 
+1. If you added or upgraded a dependency or plugin, regenerate the [dependency verification](https://docs.gradle.org/current/userguide/dependency_verification.html) checksums and review the diff of `gradle/verification-metadata.xml`. Include the tasks CI runs so every resolved artifact is recorded; the signing tasks fail without a key, which is fine here.
+
+    ```console
+    ./gradlew --write-verification-metadata sha256 --continue build testDebug assembleDebugAndroidTest publishToMavenLocal
+    ```
+
 1. Push your branch to GitHub.
     ```console
     git push -u origin your-new-branch-name

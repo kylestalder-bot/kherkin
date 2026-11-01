@@ -1,12 +1,5 @@
 import com.android.build.api.dsl.LibraryExtension
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.kherkin.publish)

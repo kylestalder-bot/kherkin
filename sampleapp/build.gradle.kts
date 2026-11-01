@@ -1,12 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.compose.compiler)
