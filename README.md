@@ -118,7 +118,7 @@ There are 3 major components of the Kherkin framework: Base Test Case, Step Defi
 The BaseIntegrationTestCase is the foundation of every test class created from this framework. It provides several features that can be utilized by the tests within each test class.
 
 1. Timeout: Time before a test fails (default 60)
-1. TestWatcher: Logs success or failure, records screenshot for failures
+1. TestWatcher: Logs success or failure, records screenshot for failures in the app under test's private storage (`files/screenshots/<test class>/`; pull with `adb shell run-as <applicationId>`)
 1. Setup: Required setup before each test, can be overridden
 1. TearDown: Required tear down after each test, resets preconditions, can be overridden
 1. Permissions: Not included in the base, but this is where permissions need to be granted before tests can run based on your app's permission requirements.
