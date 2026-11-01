@@ -1,4 +1,6 @@
 import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
+import com.android.build.api.variant.HostTestBuilder
 
 buildscript {
     repositories {
@@ -38,6 +40,9 @@ configure<ApplicationExtension> {
 
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        unitTests {
+            isIncludeAndroidResources = true
+        }
         managedDevices {
             localDevices {
                 create("pixel5api35") {
@@ -50,6 +55,13 @@ configure<ApplicationExtension> {
         emulatorControl {
             enable = true
         }
+    }
+}
+
+// Compose Preview (AGP 9.5+) needs host tests with Android resources for every variant.
+configure<ApplicationAndroidComponentsExtension> {
+    beforeVariants { variant ->
+        variant.hostTests[HostTestBuilder.UNIT_TEST_TYPE]?.enable = true
     }
 }
 
