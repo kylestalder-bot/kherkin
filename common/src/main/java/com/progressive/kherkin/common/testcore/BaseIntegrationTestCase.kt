@@ -28,6 +28,12 @@ open class BaseIntegrationTestCase {
     /** Default, overrideable timeout for each test. */
     open val timeout: Long = 60
 
+    /**
+     * Whether to save a screenshot when a test fails. Override to `false` for tests whose screens
+     * show sensitive data.
+     */
+    open val captureScreenshotOnFailure: Boolean = true
+
     @JvmField
     @Rule
     val globalTimeout: Timeout = Timeout.seconds(timeout)
@@ -54,7 +60,9 @@ open class BaseIntegrationTestCase {
             integrationTestLogger.debug("Current Activity Visible -> " +
                     if (ActivityHelper.getCurrentActivity() == null) "Unknown"
                     else ActivityHelper.getCurrentActivity().toString())
-            integrationTestFailureCapture.screenshotFailedTest(description)
+            if (captureScreenshotOnFailure) {
+                integrationTestFailureCapture.screenshotFailedTest(description)
+            }
         }
     }
 
