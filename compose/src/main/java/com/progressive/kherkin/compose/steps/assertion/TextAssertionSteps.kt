@@ -10,18 +10,18 @@ import com.progressive.kherkin.common.testcore.Gherkin
 
 /** Finds a node with [text] and checks that it is displayed. */
 fun Gherkin.IShouldSeeText(text: String, composeTestRule: ComposeTestRule) {
-    ComposeTestLogger().info("${::IShouldSeeText.name}: onNodeWithText($text).assertIsDisplayed()")
+    ComposeTestLogger().info("${::IShouldSeeText.name}: onNodeWithText(${ComposeTestLogger.mask(text)}).assertIsDisplayed()")
     composeTestRule.onNodeWithText(text).assertIsDisplayed()
 }
 
 /** Finds a node with [text] and checks that it is not displayed. */
 fun Gherkin.IShouldNotSeeText(text: String, composeTestRule: ComposeTestRule) {
-    ComposeTestLogger().info("${::IShouldNotSeeText.name}: onNodeWithText($text).assertIsNotDisplayed()")
+    ComposeTestLogger().info("${::IShouldNotSeeText.name}: onNodeWithText(${ComposeTestLogger.mask(text)}).assertIsNotDisplayed()")
     composeTestRule.onNodeWithText(text).assertIsNotDisplayed()
 }
 
 /** Finds a node with [text] and checks that it is displayed and clickable. */
 fun Gherkin.IShouldSeeTextIsClickable(text: String, composeTestRule: ComposeTestRule) {
-    ComposeTestLogger().info("${::IShouldSeeTextIsClickable.name}: onNodeWithText($text).assertHasClickAction().assertIsDisplayed()")
+    ComposeTestLogger().info("${::IShouldSeeTextIsClickable.name}: onNodeWithText(${ComposeTestLogger.mask(text)}).assertHasClickAction().assertIsDisplayed()")
     composeTestRule.onNodeWithText(text).assertHasClickAction().assertIsDisplayed()
 }

@@ -24,7 +24,7 @@ fun Gherkin.IShouldNotSeeNode(tag: String, composeTestRule: ComposeTestRule) {
 
 /** Finds a node with [tag] that contains [text] and checks that it is displayed. */
 fun Gherkin.IShouldSeeNodeWithText(tag: String, text: String, composeTestRule: ComposeTestRule) {
-    ComposeTestLogger().info("${::IShouldSeeNodeWithText.name}: onNode(hasTestTag($tag).and(hasText($text))).assertIsDisplayed()")
+    ComposeTestLogger().info("${::IShouldSeeNodeWithText.name}: onNode(hasTestTag($tag).and(hasText(${ComposeTestLogger.mask(text)}))).assertIsDisplayed()")
     composeTestRule.onNode(hasTestTag(tag).and(hasText(text))).assertIsDisplayed()
 }
 
@@ -36,6 +36,6 @@ fun Gherkin.IShouldSeeNodeIsClickable(tag: String, composeTestRule: ComposeTestR
 
 /** Finds a node with [tag] that contains [text] and checks that it is displayed and clickable. */
 fun Gherkin.IShouldSeeNodeWithTextIsClickable(tag: String, text: String, composeTestRule: ComposeTestRule) {
-    ComposeTestLogger().info("${::IShouldSeeNodeWithTextIsClickable.name}: onNode(hasTestTag($tag).and(hasText($text))).assertHasClickAction().assertIsDisplayed()")
+    ComposeTestLogger().info("${::IShouldSeeNodeWithTextIsClickable.name}: onNode(hasTestTag($tag).and(hasText(${ComposeTestLogger.mask(text)}))).assertHasClickAction().assertIsDisplayed()")
     composeTestRule.onNode(hasTestTag(tag).and(hasText(text))).assertHasClickAction().assertIsDisplayed()
 }
