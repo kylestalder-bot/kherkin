@@ -12,7 +12,7 @@ import com.progressive.kherkin.common.testcore.Gherkin
 
 /** Finds a node with [tag] and inputs [text] into the text field. */
 fun Gherkin.IEnterTextIntoField(tag: String, text: String, composeTestRule: ComposeTestRule) {
-    ComposeTestLogger().info("${::IEnterTextIntoField.name}: onNodeWithTag($tag).assert(hasSetTextAction()).performTextInput($text)")
+    ComposeTestLogger().info("${::IEnterTextIntoField.name}: onNodeWithTag($tag).assert(hasSetTextAction()).performTextInput(${ComposeTestLogger.mask(text)})")
     composeTestRule.onNodeWithTag(tag).assert(hasSetTextAction()).performTextInput(text)
     ComposeTestLogger().info("${::IEnterTextIntoField.name}: onNodeWithTag($tag).assert(hasSetTextAction()).performImeAction()")
     composeTestRule.onNodeWithTag(tag).assert(hasSetTextAction()).performImeAction()

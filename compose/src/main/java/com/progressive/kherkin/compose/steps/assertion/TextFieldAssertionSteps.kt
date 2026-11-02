@@ -20,13 +20,13 @@ fun Gherkin.IShouldSeeTextField(tag: String, composeTestRule: ComposeTestRule) {
 
 /** Finds a node that contains [text] and checks that it has EditableText. */
 fun Gherkin.IShouldSeeTextFieldWithText(text: String, composeTestRule: ComposeTestRule) {
-    ComposeTestLogger().info("${::IShouldSeeTextFieldWithText.name}: onNodeWithText($text).assert(hasSetTextAction())")
+    ComposeTestLogger().info("${::IShouldSeeTextFieldWithText.name}: onNodeWithText(${ComposeTestLogger.mask(text)}).assert(hasSetTextAction())")
     composeTestRule.onNodeWithText(text).assert(SemanticsMatcher.keyIsDefined(SemanticsProperties.EditableText))
 }
 
 /** Finds a node [tag] that contains [text] and checks that it has EditableText. */
 fun Gherkin.IShouldSeeTextFieldWithTagAndText(tag: String, text: String, composeTestRule: ComposeTestRule) {
-    ComposeTestLogger().info("${::IShouldSeeTextFieldWithTagAndText.name}: onNode(hasTestTag($tag).and(hasText($text))).assert(hasSetTextAction())")
+    ComposeTestLogger().info("${::IShouldSeeTextFieldWithTagAndText.name}: onNode(hasTestTag($tag).and(hasText(${ComposeTestLogger.mask(text)}))).assert(hasSetTextAction())")
     composeTestRule.onNode(hasTestTag(tag).and(hasText(text))).assert(SemanticsMatcher.keyIsDefined(SemanticsProperties.EditableText))
 }
 
@@ -40,7 +40,7 @@ fun Gherkin.IShouldSeeDisabledTextField(tag: String, composeTestRule: ComposeTes
 
 /** Finds a node that contains [text] and checks that it has EditableText and is not enabled. */
 fun Gherkin.IShouldSeeDisabledTextFieldWithText(text: String, composeTestRule: ComposeTestRule) {
-    ComposeTestLogger().info("${::IShouldSeeDisabledTextFieldWithText.name}: onNode(hasText($text)).assert(keyIsDefined(EditableText)).assert(isNotEnabled())")
+    ComposeTestLogger().info("${::IShouldSeeDisabledTextFieldWithText.name}: onNode(hasText(${ComposeTestLogger.mask(text)})).assert(keyIsDefined(EditableText)).assert(isNotEnabled())")
     composeTestRule.onNode(hasText(text))
         .assert(SemanticsMatcher.keyIsDefined(SemanticsProperties.EditableText))
         .assert(isNotEnabled())
@@ -48,7 +48,7 @@ fun Gherkin.IShouldSeeDisabledTextFieldWithText(text: String, composeTestRule: C
 
 /** Finds a node [tag] that contains [text] and checks that it has EditableText and is not enabled. */
 fun Gherkin.IShouldSeeDisabledTextFieldWithTagAndText(tag: String, text: String, composeTestRule: ComposeTestRule) {
-    ComposeTestLogger().info("${::IShouldSeeDisabledTextFieldWithTagAndText.name}: onNode(hasTestTag($tag).and(hasText($text))).assert(keyIsDefined(EditableText)).assert(isNotEnabled())")
+    ComposeTestLogger().info("${::IShouldSeeDisabledTextFieldWithTagAndText.name}: onNode(hasTestTag($tag).and(hasText(${ComposeTestLogger.mask(text)}))).assert(keyIsDefined(EditableText)).assert(isNotEnabled())")
     composeTestRule.onNode(hasTestTag(tag).and(hasText(text)))
         .assert(SemanticsMatcher.keyIsDefined(SemanticsProperties.EditableText))
         .assert(isNotEnabled())

@@ -109,6 +109,8 @@ class TestBasicComposeActivity : SampleBaseIntegrationTestCase() {
 
 Hybrid screens work too. Just use the espresso steps to assert or perform an action on XML views, and compose steps for compose nodes.
 
+Compose steps log each action to logcat under the `ComposeStep:` tag. Text values (typed input and expected text) are masked as `<N chars>` by default so passwords and codes typed in tests are not written to logs. To log raw values while debugging, set `ComposeTestLogger.logTextValues = true` in your test setup.
+
 # Kherkin Functionality
 
 There are 3 major components of the Kherkin framework: Base Test Case, Step Definitions, and Screen Objects.

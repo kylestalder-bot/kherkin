@@ -32,5 +32,13 @@ class ComposeTestLogger {
 
     companion object {
         const val LOGCAT_TAG = "ComposeStep:"
+
+        /** Opt-in: when true, step logs include raw text values. Off by default so secrets typed in tests stay out of logcat. */
+        @JvmStatic
+        var logTextValues = false
+
+        /** Returns [text] if [logTextValues] is enabled, otherwise a placeholder with only its length. */
+        @JvmStatic
+        fun mask(text: String): String = if (logTextValues) text else "<${text.length} chars>"
     }
 }
