@@ -18,6 +18,7 @@ class SharedPublishPlugin : Plugin<Project> {
             }
 
             fun getVersionName(): String {
+                providers.gradleProperty("kherkinVersion").orNull?.let { return it }
                 return try {
                     val describe = providers.exec {
                         commandLine("git", "describe", "--tags", "HEAD")
@@ -69,7 +70,7 @@ class SharedPublishPlugin : Plugin<Project> {
                 }
 
                 extensions.configure<MavenPublishBaseExtension> {
-                    publishToMavenCentral(true)
+                    publishToMavenCentral(automaticRelease = false)
                     signAllPublications()
 
                     coordinates("com.progressive.kherkin", artifactId, getVersionName())
