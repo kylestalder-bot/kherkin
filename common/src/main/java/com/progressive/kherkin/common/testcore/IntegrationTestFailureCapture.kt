@@ -1,6 +1,5 @@
 package com.progressive.kherkin.common.testcore
 
-import android.os.Environment
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import org.junit.runner.Description
@@ -14,6 +13,9 @@ import java.util.Locale
 /**
  * When a test fails, this class takes a screenshot and reports the directory of the file. It also
  * can write to a file to record that a test has been retried.
+ *
+ * Files are written to the app under test's app-specific storage
+ * (`/sdcard/Android/data/<package>/files/screenshots/<test class>/`), which other apps cannot read.
  */
 class IntegrationTestFailureCapture {
     fun screenshotFailedTest(description: Description) {
@@ -23,6 +25,8 @@ class IntegrationTestFailureCapture {
     }
 
     companion object {
+        private const val SCREENSHOT_DIRECTORY = "screenshots"
+
         fun logRetriedTest(description: Description) {
             try {
                 val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault())
@@ -44,8 +48,10 @@ class IntegrationTestFailureCapture {
         }
 
         private fun getPath(description: Description): File {
-            val filePath = File(Environment.getExternalStorageDirectory().absolutePath
-                    + "/screenshots/" + description.className + "/")
+            val context = InstrumentationRegistry.getInstrumentation().targetContext
+            val baseDir = context.getExternalFilesDir(SCREENSHOT_DIRECTORY)
+                ?: File(context.filesDir, SCREENSHOT_DIRECTORY)
+            val filePath = File(baseDir, description.className)
             if (!filePath.exists()) {
                 filePath.mkdirs()
             }
