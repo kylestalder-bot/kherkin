@@ -1,6 +1,6 @@
 [versions]
 activityCompose = "1.13.0"
-androidGradlePlugin = "9.3.3"
+androidGradlePlugin = "9.5.0"
 androidxJunit = "1.3.0"
 androidxNavigation = "2.10.2"
 androidxRules = "1.7.0"
@@ -15,12 +15,12 @@ findbugs = "3.0.2"
 fragmentKtx = "1.9.1"
 javaxInject = "1"
 junit = "4.13.2"
-kotlin = "2.4.20"
+kotlin = "2.4.21"
 lifecycleViewmodelKtx = "2.11.0"
 material = "1.14.0"
 mavenPublish = "0.37.0"
 orchestrator = "1.6.1"
-viewbinding = "9.4.1"
+viewbinding = "9.5.0"
 
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
