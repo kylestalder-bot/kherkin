@@ -1,4 +1,8 @@
 import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
+import com.android.build.api.variant.HostTestBuilder
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
 buildscript {
     repositories {
@@ -27,8 +31,8 @@ configure<ApplicationExtension> {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {
@@ -38,18 +42,34 @@ configure<ApplicationExtension> {
 
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        unitTests {
+            isIncludeAndroidResources = true
+        }
         managedDevices {
             localDevices {
                 create("pixel5api35") {
                     device = "Pixel 5"
                     apiLevel = 35
                     systemImageSource = "aosp-atd"
+                    testedAbi = "x86_64"
                 }
             }
         }
         emulatorControl {
             enable = true
         }
+    }
+}
+
+configure<ApplicationAndroidComponentsExtension> {
+    beforeVariants {
+        it.hostTests[HostTestBuilder.UNIT_TEST_TYPE]?.enable = true
+    }
+}
+
+extensions.configure<KotlinAndroidProjectExtension> {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_21)
     }
 }
 
