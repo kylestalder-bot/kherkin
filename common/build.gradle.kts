@@ -1,4 +1,7 @@
 import com.android.build.api.dsl.LibraryExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 buildscript {
     repositories {
@@ -15,8 +18,22 @@ plugins {
 extra.set("ARTIFACT_ID", "kherkin-common")
 extra.set("DESCRIPTION", "A dependency for kherkin-espresso and kherkin-compose")
 
+// Matches the values set centrally by the kherkin.publish convention plugin (SharedPublishPlugin).
 configure<LibraryExtension> {
     namespace = "com.progressive.kherkin.common"
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+}
+
+configure<KotlinAndroidProjectExtension> {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_21)
+        languageVersion.set(KotlinVersion.KOTLIN_2_4)
+        apiVersion.set(KotlinVersion.KOTLIN_2_4)
+    }
 }
 
 dependencies {
