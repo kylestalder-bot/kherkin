@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.createBitmap
 import org.hamcrest.Description
 import org.hamcrest.TypeSafeMatcher
 
@@ -54,7 +55,7 @@ class DrawableMatcher internal constructor(private val expectedId: Int) : TypeSa
     }
 
     private fun getBitmap(drawable: Drawable): Bitmap {
-        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ALPHA_8)
+        val bitmap = createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ALPHA_8)
         val canvas = Canvas(bitmap)
         drawable.setBounds(0, 0, canvas.width, canvas.height)
         drawable.draw(canvas)

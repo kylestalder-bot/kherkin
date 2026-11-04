@@ -1,5 +1,6 @@
 package com.progressive.kherkin.espresso.steps.actions
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.os.SystemClock
@@ -107,6 +108,8 @@ fun Gherkin.IWaitToSeeTextInAlert(text: String, timeoutInMillis: Long = EXTRA_LO
  */
 fun Gherkin.IWaitToSeeAlertWithTitle(title: String, timeoutInMillis: Long = EXTRA_LONG_TIMEOUT) {
     val appContext: Context = ApplicationProvider.getApplicationContext()
+    // The platform alert title id is not public in android.R.id.
+    @SuppressLint("DiscouragedApi")
     val alertTitle = appContext.resources.getIdentifier("alertTitle", "id", "android")
 
     waitForDialog(allOf(withId(alertTitle),withText(title)), timeoutInMillis)

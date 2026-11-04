@@ -1,6 +1,7 @@
 package com.progressive.kherkin.espresso.steps.assertion
 
 import android.R.id.message
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.SystemClock
 import androidx.test.core.app.ApplicationProvider
@@ -40,6 +41,8 @@ fun Gherkin.IShouldNotSeeAlertWithMessage(text: String) {
 /** Finds an alert with title text [title] and checks that it is displayed. */
 fun Gherkin.IShouldSeeAlertWithTitle(title: String) {
     val appContext: Context = ApplicationProvider.getApplicationContext()
+    // The platform alert title id is not public in android.R.id.
+    @SuppressLint("DiscouragedApi")
     val alertTitle = appContext.resources.getIdentifier("alertTitle", "id", "android")
     onView(withId(alertTitle))
         .inRoot(isDialog())
@@ -78,6 +81,8 @@ fun Gherkin.IShouldSeeAlertMessageContainingText(partialMessage: String) {
 /** Checks that no displayed alert with title text [title] is found. */
 fun Gherkin.IShouldNotSeeAlertWithTitle(title: String) {
     val appContext: Context = ApplicationProvider.getApplicationContext()
+    // The platform alert title id is not public in android.R.id.
+    @SuppressLint("DiscouragedApi")
     val alertTitle = appContext.resources.getIdentifier("alertTitle", "id", "android")
     SystemClock.sleep(50)
     onView(allOf(withId(alertTitle), withText(title), isDisplayed()))
