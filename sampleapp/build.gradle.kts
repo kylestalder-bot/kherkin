@@ -1,4 +1,7 @@
 import com.android.build.api.dsl.ApplicationExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 buildscript {
     repositories {
@@ -27,8 +30,8 @@ configure<ApplicationExtension> {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {
@@ -50,6 +53,15 @@ configure<ApplicationExtension> {
         emulatorControl {
             enable = true
         }
+    }
+}
+
+// sampleapp does not apply the kherkin.publish convention plugin; keep in sync with SharedPublishPlugin.
+extensions.configure<KotlinAndroidProjectExtension> {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_21)
+        languageVersion.set(KotlinVersion.KOTLIN_2_4)
+        apiVersion.set(KotlinVersion.KOTLIN_2_4)
     }
 }
 
